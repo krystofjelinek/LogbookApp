@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="cz.vse.logbookapp.controller.PonorDetailController" spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+    <Label fx:id="datumLabel" text="Datum: " style="-fx-font-size: 14px;" />
+    <Label fx:id="lokalitaLabel" text="Lokalita: " style="-fx-font-size: 14px;" />
+    <Label fx:id="hloubkaLabel" text="Hloubka: " style="-fx-font-size: 14px;" />
+    <Label fx:id="dobaLabel" text="Doba: " style="-fx-font-size: 14px;" />
+    <Button text="Close" onAction="#onCloseButtonClick" style="-fx-padding: 5 15;" />
+</VBox>
