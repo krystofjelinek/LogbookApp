@@ -26,6 +26,8 @@ public class PonorController {
     @FXML
     public Button add;
     @FXML
+    public Button addLokalita;
+    @FXML
     private VBox ponorContainer;
 
     private EntityManagerFactory emf;
@@ -195,6 +197,27 @@ public class PonorController {
 
             hBox.getChildren().addAll(datumLabel, lokalitaLabel, hloubkaLabel,viewButton);
             ponorContainer.getChildren().add(hBox);
+        }
+    }
+
+    public void onAddLokalitaButtonClick(ActionEvent actionEvent) {
+        log.info("Add Lokalita button clicked");
+        // Add your logic here, e.g., opening a new form or dialog
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cz/vse/logbookapp/view/insert-lokalita-popup.fxml"));
+            VBox addLokalitaRoot = loader.load();
+
+            InsertLokalitaController controller = loader.getController();
+            controller.setEntityManagerFactory(emf);
+            controller.setPonorController(this);
+
+            Stage addLokalitaStage = new Stage();
+            addLokalitaStage.setTitle("Add New Lokalita");
+            addLokalitaStage.setScene(new Scene(addLokalitaRoot));
+            addLokalitaStage.show();
+            controller.setStage(addLokalitaStage);
+        } catch (Exception e) {
+            log.error("Failed to open Add Lokalita popup", e);
         }
     }
 }

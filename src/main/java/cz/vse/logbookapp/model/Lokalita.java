@@ -29,6 +29,18 @@ public class Lokalita {
     @OneToMany(mappedBy = "lokalita", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ponor> ponory;
 
+
+    public Lokalita() {
+
+    }
+    // Konstruktor bez parametrů pro JPA
+    public Lokalita(String nazev, String zeme, Double maxHloubka, String typLokality, String popis) {
+        this.nazev = nazev;
+        this.zeme = zeme;
+        this.maxHloubka = maxHloubka;
+        this.typLokality = typLokality;
+        this.popis = popis;
+    }
     // Gettery a settery
     public Long getId() {
         return id;

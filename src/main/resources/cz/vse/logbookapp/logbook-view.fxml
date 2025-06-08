@@ -29,14 +29,25 @@
     </top>
 
     <left>
-        <VBox style="-fx-background-color: #f0f0f0;" BorderPane.alignment="CENTER">
+        <VBox spacing="15.0" BorderPane.alignment="CENTER" style="-fx-padding: 20 0 0 0;-fx-background-color: #f0f0f0;">
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
-            <Button fx:id="add" onAction="#onAddButtonClick" mnemonicParsing="false" prefWidth="100.0" text="+" style="-fx-font-size: 24;">
-                <font>
-                    <Font name="Arial" size="24.0" />
-                </font>
+            <Button fx:id="add" onAction="#onAddButtonClick" mnemonicParsing="false" prefWidth="100.0" style="-fx-font-size: 16;">
+                <graphic>
+                    <VBox alignment="CENTER">
+                        <Label text="+" style="-fx-font-size: 32; -fx-font-weight: bold;" />
+                        <Label text="Log dive" style="-fx-font-size: 14;" />
+                    </VBox>
+                </graphic>
+            </Button>
+            <Button fx:id="addLokalita" onAction="#onAddLokalitaButtonClick" mnemonicParsing="false" prefWidth="100.0" style="-fx-font-size: 16;">
+                <graphic>
+                    <VBox alignment="CENTER">
+                        <Label text="+" style="-fx-font-size: 36; -fx-font-weight: bold;" />
+                        <Label text="Add location" style="-fx-font-size: 14;" />
+                    </VBox>
+                </graphic>
             </Button>
             <VBox spacing="10.0" style="-fx-padding: 20 0 0 0;">
                 <Button mnemonicParsing="false" onAction="#onPonoryButtonClick" prefWidth="100.0" text="Ponory" />

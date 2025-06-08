@@ -86,18 +86,69 @@ public class InsertPonorController {
 
     @FXML
     private void onSubmit() {
-        Lokalita lokalita = getLokalita();
-        String datumText = dateField.getValue().toString();
-        String hloubkaText = depthTextField.getText();
-        String dobaText = durationTextField.getText();
-        String teplotaVodyText = waterTempTextField.getText();
-        String poznamkaText = notesTextField.getText();
+
+        //Add validation for required fields
+        Lokalita lokalita;
+        if (getLokalita() == null) {
+            lokalitaComboBox.setStyle("-fx-border-color: red;");
+            log.error("Lokalita must be selected");
+            return;
+        } else {
+            lokalitaComboBox.setStyle("-fx-border-color: none;");
+            lokalita = getLokalita();
+        }
+
+        double hloubka;
+        if (depthTextField.getText().isEmpty() || Double.parseDouble(depthTextField.getText()) <= 0) {
+            depthTextField.setStyle("-fx-border-color: red;");
+            log.error("Hloubka must not be empty");
+            return;
+        } else {
+            depthTextField.setStyle("-fx-border-color: none;");
+            hloubka = Double.parseDouble(depthTextField.getText());
+        }
+
+        LocalDate datum;
+        if (dateField.getValue() == null) {
+            dateField.setStyle("-fx-border-color: red;");
+            log.error("Datum must not be empty");
+            return;
+        } else {
+            dateField.setStyle("-fx-border-color: none;");
+            datum = LocalDate.parse(dateField.getValue().toString());
+        }
+
+        int doba;
+        if (durationTextField.getText().isEmpty() || Integer.parseInt(durationTextField.getText()) <= 0) {
+            durationTextField.setStyle("-fx-border-color: red;");
+            log.error("Doba must not be empty and must be greater than 0");
+            return;
+        } else {
+            durationTextField.setStyle("-fx-border-color: none;");
+            doba = Integer.parseInt(durationTextField.getText());
+        }
+
+        double teplotaVody;
+        if (waterTempTextField.getText().isEmpty()) {
+            waterTempTextField.setStyle("-fx-border-color: red;");
+            log.error("Teplota vody must not be empty");
+            return;
+        } else {
+            waterTempTextField.setStyle("-fx-border-color: none;");
+            teplotaVody = Double.parseDouble(waterTempTextField.getText());
+        }
+
+        String poznamka;
+        if (notesTextField.getText().isEmpty()) {
+            notesTextField.setStyle("-fx-border-color: red;");
+            log.error("Poznamka must not be empty");
+            return;
+        } else {
+            notesTextField.setStyle("-fx-border-color: none;");
+            poznamka = notesTextField.getText();
+        }
 
         try {
-            LocalDate datum = LocalDate.parse(datumText);
-            Double hloubka = Double.parseDouble(hloubkaText);
-            Integer doba = Integer.parseInt(dobaText);
-            Double teplotaVody = teplotaVodyText.isEmpty() ? null : Double.parseDouble(teplotaVodyText);
 
             EntityManager em = emf.createEntityManager();
             EntityTransaction transaction = em.getTransaction();
@@ -110,7 +161,7 @@ public class InsertPonorController {
             newPonor.setHloubka(hloubka);
             newPonor.setDoba(doba);
             newPonor.setTeplotaVody(teplotaVody);
-            newPonor.setPoznamka(poznamkaText);
+            newPonor.setPoznamka(poznamka);
 
             // Set default Uzivatel and Lokalita (replace with actual logic)
             Uzivatel uzivatel = em.find(Uzivatel.class, 1L);
