@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="cz.vse.logbookapp.controller.PonorEditController" spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Date:" minWidth="100"/>
+        <DatePicker fx:id="dateField" promptText="Select date"/>
+    </HBox>
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Lokalita:" minWidth="100"/>
+        <ComboBox fx:id="lokalitaComboBox" promptText="Select lokalita" minWidth="200"/>
+    </HBox>
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Depth:" minWidth="100"/>
+        <TextField fx:id="depthTextField" promptText="Enter depth"/>
+    </HBox>
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Duration:" minWidth="100"/>
+        <TextField fx:id="durationTextField" promptText="Enter duration"/>
+    </HBox>
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Water Temp:" minWidth="100"/>
+        <TextField fx:id="waterTempTextField" promptText="Enter water temperature"/>
+    </HBox>
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Notes:" minWidth="100"/>
+        <TextField fx:id="notesTextField" promptText="Enter notes"/>
+    </HBox>
+
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="Save" onAction="#onSave" fx:id="save"/>
+        <Button text="Cancel" onAction="#onCancel" fx:id="cancel"/>
+    </HBox>
+</VBox>

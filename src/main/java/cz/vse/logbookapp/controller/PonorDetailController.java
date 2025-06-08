@@ -38,4 +38,6 @@ public class PonorDetailController {
             stage.close();
         }
     }
+
+
 }

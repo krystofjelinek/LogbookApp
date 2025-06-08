@@ -39,21 +39,19 @@
                 </font>
             </Button>
             <VBox spacing="10.0" style="-fx-padding: 20 0 0 0;">
-                <Button mnemonicParsing="false" prefWidth="100.0" text="Ponory" />
-                <Button mnemonicParsing="false" prefWidth="100.0" text="Lokality" />
+                <Button mnemonicParsing="false" onAction="#onPonoryButtonClick" prefWidth="100.0" text="Ponory" />
+                <Button mnemonicParsing="false" onAction="#onLokalityButtonClick" prefWidth="100.0" text="Lokality" />
             </VBox>
         </VBox>
     </left>
 
     <center>
         <ScrollPane fitToWidth="true" style="-fx-background-color: #f0f0f0;">
-            <content>
                 <VBox fx:id="ponorContainer" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" >
                     <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                     </padding>
                 </VBox>
-            </content>
         </ScrollPane>
     </center>
 </BorderPane>

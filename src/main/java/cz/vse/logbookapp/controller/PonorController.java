@@ -1,5 +1,6 @@
 package cz.vse.logbookapp.controller;
 
+import cz.vse.logbookapp.model.Lokalita;
 import cz.vse.logbookapp.model.Ponor;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -22,6 +23,7 @@ import java.util.List;
 public class PonorController {
 
     private static final Logger log = LoggerFactory.getLogger(PonorController.class);
+    @FXML
     public Button add;
     @FXML
     private VBox ponorContainer;
@@ -63,8 +65,9 @@ public class PonorController {
 
             Button viewButton = new Button("🔍");
             Button deleteButton = new Button("🗑");
+            Button editButton = new Button("✏️");
 
-            hBox.getChildren().addAll(datumLabel, lokalitaLabel, hloubkaLabel, dobaLabel, viewButton, deleteButton);
+            hBox.getChildren().addAll(datumLabel, lokalitaLabel, hloubkaLabel, dobaLabel, viewButton, editButton,deleteButton);
             ponorContainer.getChildren().add(hBox);
 
             deleteButton.setOnAction(event -> {
@@ -108,9 +111,28 @@ public class PonorController {
                     log.error("Failed to open Ponor detail popup", e);
                 }
             });
+
+            editButton.setOnAction(event -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/cz/vse/logbookapp/view/edit-popup.fxml"));
+                    VBox detailRoot = loader.load();
+
+                    PonorEditController controller = loader.getController();
+                    controller.setPonorController(this);
+                    controller.setEntityManagerFactory(emf);
+                    controller.setPonor(ponor);
+
+                    Stage detailStage = new Stage();
+                    controller.setStage(detailStage);
+
+                    detailStage.setTitle("Ponor Detail");
+                    detailStage.setScene(new Scene(detailRoot));
+                    detailStage.show();
+                } catch (Exception e) {
+                    log.error("Failed to open Ponor detail popup", e);
+                }
+            });
         }
-
-
         em.close();
     }
 
@@ -125,6 +147,8 @@ public class PonorController {
             InsertPonorController controller = loader.getController();
             controller.setEntityManagerFactory(emf);
             controller.setPonorController(this);
+            controller.postInit();
+
 
             Stage addPonorStage = new Stage();
             addPonorStage.setTitle("Add New Ponor");
@@ -133,6 +157,44 @@ public class PonorController {
             controller.setStage(addPonorStage);
         } catch (Exception e) {
             log.error("Failed to open Add Ponor popup", e);
+        }
+    }
+
+
+    public void onPonoryButtonClick(ActionEvent actionEvent) {
+        loadPonory();
+    }
+
+    public void onLokalityButtonClick(ActionEvent actionEvent) {
+        ponorContainer.getChildren().clear();
+        log.info("Loading Ponory for user with ID 1");
+        ponorContainer.getChildren().clear(); // Clear the container before loading new Ponors
+        EntityManager em = emf.createEntityManager();
+        log.debug("Loading Ponory from: {}", emf.getProperties().get("jakarta.persistence.jdbc.url"));
+        EntityTransaction transaction = em.getTransaction();
+        log.info("Starting transaction");
+        transaction.begin();
+        log.info("Fetching Ponors for user with ID 1");
+        List<Lokalita> lokalitas = em.createQuery("SELECT DISTINCT p FROM Lokalita p", Lokalita.class)
+                .getResultList();
+        log.info("Fetched {} Ponors", lokalitas.size());
+        transaction.commit();
+        for (Lokalita lokalita : lokalitas) {
+            log.info("Processing Ponor with ID: {}", lokalita.getId());
+            HBox hBox = new HBox();
+            hBox.setId("ponorDetail" + lokalita.getId());
+            hBox.setSpacing(20);
+            hBox.setStyle("-fx-background-color: #ffffff; -fx-padding: 15; -fx-border-radius: 5;");
+
+            log.info("Ponor: {}", lokalita);
+            Label datumLabel = new Label(lokalita.getNazev());
+            Label lokalitaLabel = new Label(lokalita.getTypLokality());
+            Label hloubkaLabel = new Label(lokalita.getZeme());
+
+            Button viewButton = new Button("🔍");
+
+            hBox.getChildren().addAll(datumLabel, lokalitaLabel, hloubkaLabel,viewButton);
+            ponorContainer.getChildren().add(hBox);
         }
     }
 }

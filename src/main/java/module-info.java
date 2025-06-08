@@ -14,5 +14,6 @@ module cz.vse.logbookapp {
     opens cz.vse.logbookapp.model to org.hibernate.orm.core;
     exports cz.vse.logbookapp;
     exports cz.vse.logbookapp.controller;
+    exports  cz.vse.logbookapp.model;
     opens cz.vse.logbookapp.controller to javafx.fxml;
 }

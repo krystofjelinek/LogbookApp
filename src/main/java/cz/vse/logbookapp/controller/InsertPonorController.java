@@ -6,9 +6,11 @@ import cz.vse.logbookapp.model.Lokalita;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -20,6 +22,9 @@ import java.time.LocalDate;
 public class InsertPonorController {
 
     private static final Logger log = LoggerFactory.getLogger(InsertPonorController.class);
+
+    @FXML
+    public ComboBox<String> lokalitaComboBox;
 
     @FXML
     public TextField depthTextField;
@@ -42,9 +47,6 @@ public class InsertPonorController {
     @FXML
     public Button saveButton;
 
-    @FXML
-
-
     private EntityManagerFactory emf;
 
     private Stage stage;
@@ -54,8 +56,37 @@ public class InsertPonorController {
         this.stage = stage;
     }
 
+    public void postInit() {
+        log.info("Initializing InsertPonorController");
+        lokalitaComboBox.setItems(getLokalitaList());
+        dateField.setValue(LocalDate.now());
+    }
+
+    public ObservableList<String> getLokalitaList() {
+        EntityManager em = emf.createEntityManager();
+        ObservableList<String> lokalitaNazvy = FXCollections.observableArrayList(
+                em.createQuery("SELECT l.nazev FROM Lokalita l", String.class).getResultList()
+        );
+        em.close();
+        return lokalitaNazvy;
+    }
+
+    public Lokalita getLokalita() {
+        String selectedLokalita = lokalitaComboBox.getSelectionModel().getSelectedItem();
+        if (selectedLokalita != null) {
+            EntityManager em = emf.createEntityManager();
+            Lokalita lokalita = em.createQuery("SELECT l FROM Lokalita l WHERE l.nazev = :nazev", Lokalita.class)
+                    .setParameter("nazev", selectedLokalita)
+                    .getSingleResult();
+            em.close();
+            return lokalita;
+        }
+        return null;
+    }
+
     @FXML
     private void onSubmit() {
+        Lokalita lokalita = getLokalita();
         String datumText = dateField.getValue().toString();
         String hloubkaText = depthTextField.getText();
         String dobaText = durationTextField.getText();
@@ -74,6 +105,7 @@ public class InsertPonorController {
             transaction.begin();
 
             Ponor newPonor = new Ponor();
+            newPonor.setLokalita(lokalita);
             newPonor.setDatum(datum);
             newPonor.setHloubka(hloubka);
             newPonor.setDoba(doba);
@@ -82,7 +114,6 @@ public class InsertPonorController {
 
             // Set default Uzivatel and Lokalita (replace with actual logic)
             Uzivatel uzivatel = em.find(Uzivatel.class, 1L);
-            Lokalita lokalita = em.find(Lokalita.class, 1L);
             newPonor.setUzivatel(uzivatel);
             newPonor.setLokalita(lokalita);
 
