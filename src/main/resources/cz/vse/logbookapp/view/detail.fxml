@@ -2,10 +2,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="cz.vse.logbookapp.controller.PonorDetailController" spacing="10" alignment="CENTER" style="-fx-padding: 20;">
-    <Label fx:id="datumLabel" text="Datum: " style="-fx-font-size: 14px;" />
-    <Label fx:id="lokalitaLabel" text="Lokalita: " style="-fx-font-size: 14px;" />
-    <Label fx:id="hloubkaLabel" text="Hloubka: " style="-fx-font-size: 14px;" />
-    <Label fx:id="dobaLabel" text="Doba: " style="-fx-font-size: 14px;" />
-    <Button text="Close" onAction="#onCloseButtonClick" style="-fx-padding: 5 15;" />
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="cz.vse.logbookapp.controller.PonorDetailController"
+      spacing="16"
+      alignment="CENTER"
+      style="-fx-padding: 32; -fx-background-color: #f4f8fb; -fx-border-radius: 14; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, #b0b8c1, 10, 0.2, 0, 2);">
+    <Label fx:id="datumLabel"
+           text="Date: "
+           style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2a3a4d;" />
+    <Label fx:id="lokalitaLabel"
+           text="Dive site: "
+           style="-fx-font-size: 16px; -fx-text-fill: #4a5a6a;" />
+    <Label fx:id="hloubkaLabel"
+           text="Depth: "
+           style="-fx-font-size: 16px; -fx-text-fill: #4a5a6a;" />
+    <Label fx:id="dobaLabel"
+           text="Duration: "
+           style="-fx-font-size: 16px; -fx-text-fill: #4a5a6a;" />
+    <Button text="Close"
+            onAction="#onCloseButtonClick"
+            style="-fx-background-color: #3b7ddd; -fx-text-fill: white; -fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 8 32;" />
 </VBox>

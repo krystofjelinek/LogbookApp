@@ -51,6 +51,7 @@ public class InsertPonorController {
 
     private Stage stage;
     private PonorController ponorController;
+    private Uzivatel uzivatel;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -162,9 +163,6 @@ public class InsertPonorController {
             newPonor.setDoba(doba);
             newPonor.setTeplotaVody(teplotaVody);
             newPonor.setPoznamka(poznamka);
-
-            // Set default Uzivatel and Lokalita (replace with actual logic)
-            Uzivatel uzivatel = em.find(Uzivatel.class, 1L);
             newPonor.setUzivatel(uzivatel);
             newPonor.setLokalita(lokalita);
 
@@ -195,5 +193,10 @@ public class InsertPonorController {
 
     public void setPonorController(PonorController ponorController) {
         this.ponorController = ponorController;
+    }
+
+    public void setUzivatel(Uzivatel uzivatel) {
+        log.debug("Setting Uzivatel in InsertPonorController: {}", uzivatel.getEmail());
+        this.uzivatel = uzivatel;
     }
 }

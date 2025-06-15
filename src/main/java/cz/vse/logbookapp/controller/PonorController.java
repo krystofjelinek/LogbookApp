@@ -2,10 +2,10 @@ package cz.vse.logbookapp.controller;
 
 import cz.vse.logbookapp.model.Lokalita;
 import cz.vse.logbookapp.model.Ponor;
+import cz.vse.logbookapp.model.Uzivatel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,15 +27,25 @@ public class PonorController {
     public Button add;
     @FXML
     public Button addLokalita;
+
+    @FXML
+    public Label userNameLabel;
     @FXML
     private VBox ponorContainer;
 
     private EntityManagerFactory emf;
+    private Uzivatel uzivatel;
 
     @FXML
-    public void initialize() {
-        emf = Persistence.createEntityManagerFactory("logbookPU");
+    public void initializeData() {
+        setUserNameLabel();
         loadPonory();
+    }
+
+    private void setUserNameLabel() {
+        if (uzivatel != null) {
+            userNameLabel.setText(uzivatel.getJmeno());
+        }
     }
 
     void loadPonory() {
@@ -48,7 +58,7 @@ public class PonorController {
         transaction.begin();
         log.info("Fetching Ponors for user with ID 1");
         List<Ponor> ponory = em.createQuery("SELECT p FROM Ponor p WHERE p.uzivatel.id = :uzivatelId", Ponor.class)
-                .setParameter("uzivatelId", 1L)
+                .setParameter("uzivatelId", uzivatel.getId())
                 .getResultList();
         log.info("Fetched {} Ponors", ponory.size());
         transaction.commit();
@@ -98,7 +108,8 @@ public class PonorController {
 
             viewButton.setOnAction(event -> {
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/cz/vse/logbookapp/view/detail.fxml"));                    VBox detailRoot = loader.load();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/cz/vse/logbookapp/view/detail.fxml"));
+                    VBox detailRoot = loader.load();
 
                     PonorDetailController controller = loader.getController();
                     controller.setPonor(ponor);
@@ -149,7 +160,9 @@ public class PonorController {
             InsertPonorController controller = loader.getController();
             controller.setEntityManagerFactory(emf);
             controller.setPonorController(this);
+            controller.setUzivatel(uzivatel); // Set the user for the controller
             controller.postInit();
+
 
 
             Stage addPonorStage = new Stage();
@@ -194,6 +207,24 @@ public class PonorController {
             Label hloubkaLabel = new Label(lokalita.getZeme());
 
             Button viewButton = new Button("🔍");
+            viewButton.setOnAction(event -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/cz/vse/logbookapp/view/lokalita-detail.fxml"));
+                    VBox detailRoot = loader.load();
+
+                    LokalitaDetailController controller = loader.getController();
+                    controller.setLokalita(lokalita);
+
+                    Stage detailStage = new Stage();
+                    controller.setStage(detailStage);
+
+                    detailStage.setTitle("Detail - " + lokalita.getNazev());
+                    detailStage.setScene(new Scene(detailRoot));
+                    detailStage.show();
+                } catch (Exception e) {
+                    log.error("Failed to open Lokalita detail popup", e);
+                }
+            });
 
             hBox.getChildren().addAll(datumLabel, lokalitaLabel, hloubkaLabel,viewButton);
             ponorContainer.getChildren().add(hBox);
@@ -219,5 +250,15 @@ public class PonorController {
         } catch (Exception e) {
             log.error("Failed to open Add Lokalita popup", e);
         }
+    }
+
+    public void setUzivatel(Uzivatel uzivatel) {
+        log.info("Setting user for the session: {}", uzivatel.getEmail());
+        this.uzivatel = uzivatel;
+    }
+
+    public void setEmf(EntityManagerFactory emf) {
+        log.debug("Setting EntityManagerFactory for PonorController");
+        this.emf = emf;
     }
 }

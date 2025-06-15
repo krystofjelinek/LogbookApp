@@ -1,5 +1,5 @@
 -- Create table Lokalita
-CREATE TABLE Lokalita (
+CREATE TABLE IF NOT EXISTS Lokalita (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
                           nazev VARCHAR(255) NOT NULL,
                           zeme VARCHAR(255) NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE Lokalita (
 );
 
 -- Create table Uzivatel
-CREATE TABLE Uzivatel (
+CREATE TABLE IF NOT EXISTS Uzivatel (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
                           jmeno VARCHAR(255) NOT NULL,
                           email VARCHAR(255) NOT NULL UNIQUE,
@@ -18,7 +18,7 @@ CREATE TABLE Uzivatel (
 );
 
 -- Create table Ponor
-CREATE TABLE Ponor (
+CREATE TABLE IF NOT EXISTS Ponor (
                        id BIGINT AUTO_INCREMENT PRIMARY KEY,
                        uzivatel_id BIGINT NOT NULL,
                        lokalita_id BIGINT NOT NULL,
@@ -49,7 +49,7 @@ VALUES (1, 1, '2023-10-01', 30, 45, 25.5, 'Clear');
 INSERT INTO Ponor (uzivatel_id, lokalita_id, datum, hloubka, doba, teplota_vody, poznamka)
 VALUES (1, 2, '2023-10-02', 20, 30, 26.0, 'Moderate');
 
-SELECT * FROM Ponor WHERE uzivatel_id = 1;
+SELECT * FROM UZIVATEL WHERE email = 'john.doe@example.com';
 
 SELECT
     p.id AS ponor_id,
@@ -84,3 +84,5 @@ from
     Ponor p1_0
 where
     p1_0.uzivatel_id=1;
+
+select * from PONOR

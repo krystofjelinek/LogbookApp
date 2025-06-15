@@ -14,6 +14,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -55,6 +58,8 @@ public class PonorEditController {
 
     private EntityManagerFactory emf;
     private PonorController controller;
+
+    private static final Logger log = LoggerFactory.getLogger(PonorEditController.class);
 
     public void setPonor(Ponor ponor) {
         dateField.setValue(ponor.getDatum());
@@ -99,6 +104,43 @@ public class PonorEditController {
 
     @FXML
     public void onSave(ActionEvent actionEvent) {
+        if (dateField.getValue() == null) {
+            dateField.setStyle("-fx-border-color: red;");
+            return;
+        } else {
+            dateField.setStyle("-fx-border-color: none;");
+        }
+        if (lokalitaComboBox.getValue() == null) {
+            lokalitaComboBox.setStyle("-fx-border-color: red;");
+            return;
+        } else {
+            lokalitaComboBox.setStyle("-fx-border-color: none;");
+        }
+        if (depthTextField.getText().isEmpty() || Double.parseDouble(depthTextField.getText()) <= 0) {
+            depthTextField.setStyle("-fx-border-color: red;");
+            return;
+        } else {
+            depthTextField.setStyle("-fx-border-color: none;");
+        }
+        if (durationTextField.getText().isEmpty() || Integer.parseInt(durationTextField.getText()) <= 0) {
+            durationTextField.setStyle("-fx-border-color: red;");
+            return;
+        } else {
+            durationTextField.setStyle("-fx-border-color: none;");
+        }
+        if (waterTempTextField.getText().isEmpty() || Double.parseDouble(waterTempTextField.getText()) < 0) {
+            waterTempTextField.setStyle("-fx-border-color: red;");
+            return;
+        } else {
+            waterTempTextField.setStyle("-fx-border-color: none;");
+        }
+        if (notesTextField.getText().isEmpty()) {
+            notesTextField.setStyle("-fx-border-color: red;");
+            return;
+        } else {
+            notesTextField.setStyle("-fx-border-color: none;");
+        }
+
         if (ponor != null) {
             ponor.setDatum(dateField.getValue());
             ponor.setHloubka(Double.parseDouble(depthTextField.getText()));
@@ -118,7 +160,7 @@ public class PonorEditController {
                 if (transaction.isActive()) {
                     transaction.rollback();
                 }
-                e.printStackTrace();
+                log.error("Error saving Ponor: ", e);
             } finally {
                 em.close();
             }

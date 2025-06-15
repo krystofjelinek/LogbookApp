@@ -26,10 +26,10 @@ public class PonorDetailController {
     }
 
     public void setPonor(Ponor ponor) {
-        datumLabel.setText("Datum: " + ponor.getDatum());
-        lokalitaLabel.setText("Lokalita: " + ponor.getLokalita().getNazev());
-        hloubkaLabel.setText("Hloubka: " + ponor.getHloubka() + " m");
-        dobaLabel.setText("Doba: " + ponor.getDoba() + " min");
+        datumLabel.setText("Date: " + ponor.getDatum());
+        lokalitaLabel.setText("Dive site: " + ponor.getLokalita().getNazev());
+        hloubkaLabel.setText("Depth: " + ponor.getHloubka() + " m");
+        dobaLabel.setText("Duration: " + ponor.getDoba() + " min");
     }
 
     @FXML

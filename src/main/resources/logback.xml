@@ -22,8 +22,9 @@
     </root>
 
     <!-- Logger for specific package -->
-    <logger name="cz.vse.logbookapp" level="debug" additivity="false">
+    <logger name="cz.vse.logbookapp.Main" level="debug" additivity="false">
         <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
     </logger>
     <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
 </configuration>

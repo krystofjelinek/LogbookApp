@@ -11,9 +11,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Slf4j
 public class InsertLokalitaController {
 
     @FXML
@@ -42,6 +42,8 @@ public class InsertLokalitaController {
     private PonorController controller;
 
     private Stage stage;
+
+    private static final Logger log = LoggerFactory.getLogger(InsertLokalitaController.class);
 
     public void setEntityManagerFactory(EntityManagerFactory emf) {
         this.emf = emf;

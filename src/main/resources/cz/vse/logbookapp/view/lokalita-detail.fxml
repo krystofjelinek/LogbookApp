@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<VBox spacing="15" alignment="CENTER"
+      xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="cz.vse.logbookapp.controller.LokalitaDetailController"
+      style="-fx-padding: 30; -fx-background-color: #f4f8fb; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, #b0b8c1, 10, 0.2, 0, 2);">
+    <Label fx:id="nazevLabel" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2a3a4d;"/>
+    <Label fx:id="popisLabel" style="-fx-font-size: 15px; -fx-text-fill: #4a5a6a;"/>
+    <Label fx:id="hloubkaLabel" style="-fx-font-size: 15px; -fx-text-fill: #4a5a6a;"/>
+    <Label fx:id="typLabel" style="-fx-font-size: 15px; -fx-text-fill: #4a5a6a;"/>
+    <Label fx:id="zemeLabel" style="-fx-font-size: 15px; -fx-text-fill: #4a5a6a;"/>
+    <Button text="Close"
+            onAction="#onCloseButtonClick"
+            style="-fx-background-color: #3b7ddd; -fx-text-fill: white; -fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 8 24;"/>
+</VBox>
