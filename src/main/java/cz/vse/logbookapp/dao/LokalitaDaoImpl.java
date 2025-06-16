@@ -60,23 +60,6 @@ public class LokalitaDaoImpl implements LokalitaDao {
     }
 
     @Override
-    public List<String> findAllNazvy() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            logger.debug("Fetching all Lokalita names (nazvy).");
-            List<String> nazvy = em.createQuery("SELECT l.nazev FROM Lokalita l", String.class).getResultList();
-            logger.info("Fetched {} Lokalita names.", nazvy.size());
-            return nazvy;
-        } catch (Exception e) {
-            logger.error("Error fetching Lokalita names.", e);
-            throw e;
-        } finally {
-            em.close();
-            logger.debug("EntityManager closed after fetching Lokalita names.");
-        }
-    }
-
-    @Override
     public ObservableMap<String, Lokalita> findAllMap() {
         EntityManager em = emf.createEntityManager();
         try {

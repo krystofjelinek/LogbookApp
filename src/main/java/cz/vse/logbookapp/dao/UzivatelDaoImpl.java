@@ -40,20 +40,4 @@ public class UzivatelDaoImpl implements UzivatelDao {
         }
     }
 
-    @Override
-    public List<Uzivatel> findAll() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            logger.debug("Fetching all Uzivatel entities.");
-            List<Uzivatel> uzivatelList = em.createQuery("SELECT u FROM Uzivatel u", Uzivatel.class).getResultList();
-            logger.info("Fetched {} Uzivatel entities.", uzivatelList.size());
-            return uzivatelList;
-        } catch (Exception e) {
-            logger.error("Error fetching all Uzivatel entities.", e);
-            throw e;
-        } finally {
-            em.close();
-            logger.debug("EntityManager closed after fetching all Uzivatel entities.");
-        }
-    }
 }

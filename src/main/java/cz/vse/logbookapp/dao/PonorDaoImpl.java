@@ -77,27 +77,6 @@ public class PonorDaoImpl implements PonorDao {
     }
 
     @Override
-    public Ponor findById(Long id) {
-        logger.debug("Fetching Ponor entity by id: {}", id);
-        EntityManager em = emf.createEntityManager();
-        try {
-            Ponor ponor = em.find(Ponor.class, id);
-            if (ponor != null) {
-                logger.info("Found Ponor entity with id: {}", id);
-            } else {
-                logger.info("No Ponor entity found with id: {}", id);
-            }
-            return ponor;
-        } catch (Exception e) {
-            logger.error("Error fetching Ponor entity by id: {}", id, e);
-            throw e;
-        } finally {
-            em.close();
-            logger.debug("EntityManager closed after fetching Ponor by id: {}", id);
-        }
-    }
-
-    @Override
     public List<Ponor> findAllByUser(Uzivatel uzivatel) {
         EntityManager em = emf.createEntityManager();
         try {
