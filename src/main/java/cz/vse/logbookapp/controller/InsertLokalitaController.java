@@ -1,9 +1,7 @@
 package cz.vse.logbookapp.controller;
 
+import cz.vse.logbookapp.dao.LokalitaDao;
 import cz.vse.logbookapp.model.Lokalita;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -42,17 +40,13 @@ public class InsertLokalitaController {
     @FXML
     public Button cancelButton;
 
-    private EntityManagerFactory emf;
-
     private PonorController controller;
 
     private Stage stage;
 
     private static final Logger log = LoggerFactory.getLogger(InsertLokalitaController.class);
 
-    public void setEntityManagerFactory(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
+    private LokalitaDao lokalitaDao;
 
     public void setPonorController(PonorController ponorController) {
         this.controller = ponorController;
@@ -133,13 +127,8 @@ public class InsertLokalitaController {
 
         log.info("Saving new Lokalita: {}, {}, {}, {}, {}", nazev, zeme, hloubka, typ, popis);
         Lokalita lokalita = new Lokalita(nazev, zeme, Double.parseDouble(hloubka), typ, popis);
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        em.persist(lokalita);
-        transaction.commit();
+        lokalitaDao.save(lokalita);
         log.info("Lokalita saved successfully: {}", lokalita);
-        em.close();
         if (stage != null) {
             stage.close();
             log.debug("InsertLokalita popup closed after saving");
@@ -160,5 +149,9 @@ public class InsertLokalitaController {
             stage.close();
             log.debug("Cancel button clicked, closing InsertLokalita popup");
         }
+    }
+
+    public void setLokalitaDao(LokalitaDao lokalitaDao) {
+        this.lokalitaDao = lokalitaDao;
     }
 }

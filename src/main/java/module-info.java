@@ -10,6 +10,7 @@ module cz.vse.logbookapp {
     requires org.hibernate.orm.core;
     requires org.slf4j;
     requires static lombok;
+    requires com.h2database;
 
     opens cz.vse.logbookapp to javafx.fxml;
     opens cz.vse.logbookapp.model to org.hibernate.orm.core;

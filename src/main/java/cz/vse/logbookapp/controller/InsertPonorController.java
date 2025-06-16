@@ -1,13 +1,11 @@
 package cz.vse.logbookapp.controller;
 
+import cz.vse.logbookapp.dao.LokalitaDao;
+import cz.vse.logbookapp.dao.PonorDao;
 import cz.vse.logbookapp.model.Ponor;
 import cz.vse.logbookapp.model.Uzivatel;
 import cz.vse.logbookapp.model.Lokalita;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -51,13 +49,13 @@ public class InsertPonorController {
     @FXML
     public Button saveButton;
 
-    private EntityManagerFactory emf;
-
     private Stage stage;
 
     private PonorController ponorController;
 
     private Uzivatel uzivatel;
+    private PonorDao ponorDao;
+    private LokalitaDao lokalitaDao;
 
     /**
      * Sets the stage for this controller.
@@ -72,24 +70,10 @@ public class InsertPonorController {
      */
     public void postInit() {
         log.debug("Initializing InsertPonorController");
-        lokalitaComboBox.setItems(getLokalitaList());
+        lokalitaComboBox.setItems(FXCollections.observableArrayList(lokalitaDao.findAllMap().keySet()));
         dateField.setValue(LocalDate.now());
     }
 
-    /**
-     * Retrieves the list of Lokalita names from the database.
-     * This method queries the database for all Lokalita entries and returns their names as an ObservableList.
-     *
-     * @return ObservableList of Lokalita names
-     */
-    public ObservableList<String> getLokalitaList() {
-        EntityManager em = emf.createEntityManager();
-        ObservableList<String> lokalitaNazvy = FXCollections.observableArrayList(
-                em.createQuery("SELECT l.nazev FROM Lokalita l", String.class).getResultList()
-        );
-        em.close();
-        return lokalitaNazvy;
-    }
 
     /**
      * Retrieves the selected Lokalita from the ComboBox.
@@ -99,15 +83,7 @@ public class InsertPonorController {
      */
     public Lokalita getLokalita() {
         String selectedLokalita = lokalitaComboBox.getSelectionModel().getSelectedItem();
-        if (selectedLokalita != null) {
-            EntityManager em = emf.createEntityManager();
-            Lokalita lokalita = em.createQuery("SELECT l FROM Lokalita l WHERE l.nazev = :nazev", Lokalita.class)
-                    .setParameter("nazev", selectedLokalita)
-                    .getSingleResult();
-            em.close();
-            return lokalita;
-        }
-        return null;
+        return lokalitaDao.findByNazev(selectedLokalita);
     }
 
     /**
@@ -118,15 +94,14 @@ public class InsertPonorController {
     @FXML
     private void onSubmit() {
 
-        //Add validation for required fields
         Lokalita lokalita;
-        if (getLokalita() == null) {
+        if (lokalitaDao.findByNazev(lokalitaComboBox.getValue()) == null) {
             lokalitaComboBox.setStyle("-fx-border-color: red;");
             log.error("Lokalita must be selected");
             return;
         } else {
             lokalitaComboBox.setStyle("-fx-border-color: none;");
-            lokalita = getLokalita();
+            lokalita = lokalitaDao.findByNazev(lokalitaComboBox.getValue());
         }
 
         double hloubka;
@@ -179,34 +154,20 @@ public class InsertPonorController {
             poznamka = notesTextField.getText();
         }
 
-        try {
+        Ponor newPonor = new Ponor();
+        newPonor.setLokalita(lokalita);
+        newPonor.setDatum(datum);
+        newPonor.setHloubka(hloubka);
+        newPonor.setDoba(doba);
+        newPonor.setTeplotaVody(teplotaVody);
+        newPonor.setPoznamka(poznamka);
+        newPonor.setUzivatel(uzivatel);
+        newPonor.setLokalita(lokalita);
 
-            EntityManager em = emf.createEntityManager();
-            EntityTransaction transaction = em.getTransaction();
+        ponorDao.save(newPonor);
 
-            transaction.begin();
-
-            Ponor newPonor = new Ponor();
-            newPonor.setLokalita(lokalita);
-            newPonor.setDatum(datum);
-            newPonor.setHloubka(hloubka);
-            newPonor.setDoba(doba);
-            newPonor.setTeplotaVody(teplotaVody);
-            newPonor.setPoznamka(poznamka);
-            newPonor.setUzivatel(uzivatel);
-            newPonor.setLokalita(lokalita);
-
-            em.persist(newPonor);
-
-            transaction.commit();
-            em.close();
-
-            log.info("New Ponor added successfully: {}", newPonor);
-            stage.close(); // Close the popup
-            ponorController.loadPonory(); // Refresh the list in PonorController
-        } catch (Exception e) {
-            log.error("Failed to add new Ponor", e);
-        }
+        stage.close();
+        ponorController.loadPonory();
     }
 
     /**
@@ -219,16 +180,6 @@ public class InsertPonorController {
         if (stage != null) {
             stage.close(); // Close the popup without saving
         }
-    }
-
-    /**
-     * Sets the EntityManagerFactory for this controller.
-     * This method is used to inject the EntityManagerFactory dependency.
-     *
-     * @param emf EntityManagerFactory instance
-     */
-    public void setEntityManagerFactory(EntityManagerFactory emf) {
-        this.emf = emf;
     }
 
     /**
@@ -251,5 +202,13 @@ public class InsertPonorController {
     public void setUzivatel(Uzivatel uzivatel) {
         log.debug("Setting Uzivatel in InsertPonorController: {}", uzivatel.getEmail());
         this.uzivatel = uzivatel;
+    }
+
+    public void setPonorDao(PonorDao ponorDao) {
+        this.ponorDao = ponorDao;
+    }
+
+    public void setLokalitaDao(LokalitaDao lokalitaDao) {
+        this.lokalitaDao = lokalitaDao;
     }
 }

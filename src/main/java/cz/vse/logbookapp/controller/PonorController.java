@@ -1,11 +1,11 @@
 package cz.vse.logbookapp.controller;
 
+import cz.vse.logbookapp.dao.LokalitaDao;
+import cz.vse.logbookapp.dao.PonorDao;
+import cz.vse.logbookapp.dao.UzivatelDao;
 import cz.vse.logbookapp.model.Lokalita;
 import cz.vse.logbookapp.model.Ponor;
 import cz.vse.logbookapp.model.Uzivatel;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,9 +23,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
 
-//TODO: Add error handling for database operations
-//TODO: Add readme file to the project root
-
 /**
  * Controller for managing Ponors (dives) and Lokality (locations) in the application.
  * This controller handles the UI interactions for displaying, adding, editing, and deleting Ponors and Lokality.
@@ -33,8 +30,6 @@ import java.util.List;
 public class PonorController {
 
     private static final Logger log = LoggerFactory.getLogger(PonorController.class);
-
-    private EntityManagerFactory emf;
 
     private Uzivatel uzivatel;
 
@@ -49,6 +44,11 @@ public class PonorController {
 
     @FXML
     private VBox ponorContainer;
+
+    PonorDao ponorDao;
+
+    LokalitaDao lokalitaDao;
+    private UzivatelDao uzivatelDao;
 
 
     /**
@@ -76,16 +76,7 @@ public class PonorController {
     void loadPonory() {
         log.info("Loading Ponory for user with ID: {}", uzivatel.getId());
         ponorContainer.getChildren().clear();
-        EntityManager em = emf.createEntityManager();
-        log.debug("Loading Ponory from: {}", emf.getProperties().get("jakarta.persistence.jdbc.url"));
-        EntityTransaction transaction = em.getTransaction();
-        log.debug("Starting transaction");
-        transaction.begin();
-        List<Ponor> ponory = em.createQuery("SELECT p FROM Ponor p WHERE p.uzivatel.id = :uzivatelId", Ponor.class)
-                .setParameter("uzivatelId", uzivatel.getId())
-                .getResultList();
-        log.info("Fetched {} Ponors", ponory.size());
-        transaction.commit();
+        List<Ponor> ponory = ponorDao.findAllByUser(uzivatel);
         for (Ponor ponor : ponory) {
             log.info("Processing Ponor with ID: {}", ponor.getId());
             HBox hBox = new HBox();
@@ -148,26 +139,8 @@ public class PonorController {
 
             deleteButton.setOnAction(event -> {
                 log.info("Deleting Ponor with ID: {}", ponor.getId());
-                EntityManager deleteEm = emf.createEntityManager(); // Create a new EntityManager
-                EntityTransaction deleteTransaction = deleteEm.getTransaction();
-                try {
-                    deleteTransaction.begin();
-                    Ponor ponorToDelete = deleteEm.find(Ponor.class, ponor.getId()); // Fetch the entity again
-                    if (ponorToDelete != null) {
-                        deleteEm.remove(ponorToDelete);
-                    }
-                    deleteTransaction.commit();
-                    log.info("Ponor with ID: {} deleted successfully", ponor.getId());
-                    ponorContainer.getChildren().remove(hBox);
-                    loadPonory();
-                } catch (Exception e) {
-                    log.error("Failed to delete Ponor with ID: {}", ponor.getId(), e);
-                    if (deleteTransaction.isActive()) {
-                        deleteTransaction.rollback();
-                    }
-                } finally {
-                    deleteEm.close(); // Close the new EntityManager
-                }
+                ponorDao.delete(ponor.getId());
+                loadPonory();
             });
 
             viewButton.setOnAction(event -> {
@@ -195,9 +168,11 @@ public class PonorController {
                     VBox detailRoot = loader.load();
 
                     PonorEditController controller = loader.getController();
+                    controller.setLokalitaDao(lokalitaDao);
                     controller.setPonorController(this);
-                    controller.setEntityManagerFactory(emf);
                     controller.setPonor(ponor);
+                    controller.setPonorDao(ponorDao);
+
 
                     Stage detailStage = new Stage();
                     controller.setStage(detailStage);
@@ -210,7 +185,6 @@ public class PonorController {
                 }
             });
         }
-        em.close();
     }
 
     /**
@@ -227,9 +201,10 @@ public class PonorController {
             VBox addPonorRoot = loader.load();
 
             InsertPonorController controller = loader.getController();
-            controller.setEntityManagerFactory(emf);
             controller.setPonorController(this);
-            controller.setUzivatel(uzivatel); // Set the user for the controller
+            controller.setUzivatel(uzivatel);
+            controller.setPonorDao(ponorDao);
+            controller.setLokalitaDao(lokalitaDao);
             controller.postInit();
 
 
@@ -259,17 +234,9 @@ public class PonorController {
      */
     public void onLokalityButtonClick(ActionEvent actionEvent) {
         ponorContainer.getChildren().clear();
-        log.info("Loading Lokality for user with ID: {}", uzivatel.getId());
-        ponorContainer.getChildren().clear();
-        EntityManager em = emf.createEntityManager();
-        log.debug("Loading Lokality from: {}", emf.getProperties().get("jakarta.persistence.jdbc.url"));
-        EntityTransaction transaction = em.getTransaction();
-        log.debug("Starting transaction");
-        transaction.begin();
-        List<Lokalita> lokalitas = em.createQuery("SELECT DISTINCT p FROM Lokalita p", Lokalita.class)
-                .getResultList();
-        log.info("Fetched {} Lokality", lokalitas.size());
-        transaction.commit();
+
+        List<Lokalita> lokalitas = lokalitaDao.findAll();
+
         for (Lokalita lokalita : lokalitas) {
             log.info("Processing Lokalita with ID: {}", lokalita.getId());
             HBox hBox = new HBox();
@@ -341,8 +308,8 @@ public class PonorController {
             VBox addLokalitaRoot = loader.load();
 
             InsertLokalitaController controller = loader.getController();
-            controller.setEntityManagerFactory(emf);
             controller.setPonorController(this);
+            controller.setLokalitaDao(lokalitaDao);
 
             Stage addLokalitaStage = new Stage();
             addLokalitaStage.setTitle("Add New Lokalita");
@@ -364,13 +331,17 @@ public class PonorController {
         this.uzivatel = uzivatel;
     }
 
-    /**
-     * Sets the EntityManagerFactory for the PonorController.
-     *
-     * @param emf The EntityManagerFactory to set.
-     */
-    public void setEmf(EntityManagerFactory emf) {
-        log.debug("Setting EntityManagerFactory for PonorController");
-        this.emf = emf;
+    public void setUzivatelDao(UzivatelDao uzivatelDao) {
+        this.uzivatelDao = uzivatelDao;
+    }
+
+    public void setPonorDao(PonorDao ponorDao) {
+        log.info("Setting PonorDao for the session");
+        this.ponorDao = ponorDao;
+    }
+
+    public void setLokalitaDao(LokalitaDao lokalitaDao) {
+        log.info("Setting LokalitaDao for the session");
+        this.lokalitaDao = lokalitaDao;
     }
 }

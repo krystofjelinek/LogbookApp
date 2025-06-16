@@ -1,10 +1,9 @@
 package cz.vse.logbookapp.controller;
 
+import cz.vse.logbookapp.dao.LokalitaDao;
+import cz.vse.logbookapp.dao.PonorDao;
+import cz.vse.logbookapp.dao.UzivatelDao;
 import cz.vse.logbookapp.model.Uzivatel;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.util.List;
+
+import java.io.IOException;
 
 /**
  * Controller for handling user login in the Logbook application.
@@ -25,22 +25,25 @@ public class LoginController {
 
     private final Logger log = LoggerFactory.getLogger(LoginController.class.getName());
 
-    private EntityManagerFactory emf;
 
     @FXML
     public TextField usernameField;
 
     private Stage stage;
 
-    /**
-     * Initializes the EntityManagerFactory for database operations.
-     * This method is called when the controller is loaded.
-     */
-    @FXML
-    public void initialize() {
-        emf = Persistence.createEntityManagerFactory("logbookPU");
+    private UzivatelDao uzivatelDao;
+
+    private PonorDao ponorDao;
+    private LokalitaDao lokalitaDao;
+
+
+    public void setUzivatelDao(UzivatelDao uzivatelDao) {
+        this.uzivatelDao = uzivatelDao;
     }
 
+    public void setPonorDao(PonorDao ponorDao) {
+        this.ponorDao = ponorDao;
+    }
     /**
      * Handles the login action when the user clicks the login button.
      * Validates the username input and checks if the user exists in the database.
@@ -49,7 +52,7 @@ public class LoginController {
      * @param actionEvent The action event triggered by clicking the login button.
      */
     @FXML
-    public void onLogin(ActionEvent actionEvent) {
+    public void onLogin(ActionEvent actionEvent) throws IOException {
         String username = usernameField.getText();
         if (username == null || username.isEmpty()) {
             log.warn("Username-field is null or empty");
@@ -57,35 +60,24 @@ public class LoginController {
             return;
         }
         usernameField.setStyle("-fx-text-fill: black;");
-
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            log.info("Attempting to log in user: " + username);
-            List<Uzivatel> uzivatele = em.createQuery("SELECT u FROM Uzivatel u WHERE u.email = :email", Uzivatel.class)
-                    .setParameter("email", username)
-                    .getResultList();
-            if (uzivatele.isEmpty()) {
-                log.warn("User " + username + " not found in the database.");
+            Uzivatel uzivatel = uzivatelDao.findByEmail(username);
+            if (uzivatel == null) {
                 usernameField.setStyle("-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 8; -fx-border-color: red;");
                 usernameField.clear();
                 usernameField.setPromptText("Username not found");
-                transaction.rollback();
-                return;
-            }
-            Uzivatel uzivatel = uzivatele.getFirst();
+            } else {
             log.info("User " + uzivatel.getEmail() + " found in the database.");
-            transaction.commit();
-            em.close();
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cz/vse/logbookapp/view/logbook-view.fxml"));
             Parent root = loader.load();
 
             PonorController controller = loader.getController();
             controller.setUzivatel(uzivatel);
-            controller.setEmf(emf);
+            controller.setUzivatelDao(uzivatelDao);
+            controller.setPonorDao(ponorDao);
+            controller.setLokalitaDao(lokalitaDao);
             controller.initializeData();
+
 
             Stage mainStage = new Stage();
             mainStage.setTitle("Logbook - " + uzivatel.getEmail());
@@ -94,18 +86,9 @@ public class LoginController {
 
             // Only close the login stage after successful login
             stage.close();
-        } catch (Exception e) {
-            log.warn("User " + username + " not found in the database.");
-            log.error("Error during login: ", e);
-            if (transaction.isActive()) {
-                transaction.rollback();
             }
-            em.close();
-            usernameField.setStyle("-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 8; -fx-border-color: red;");
-            usernameField.clear();
-            usernameField.setPromptText("Username not found");
         }
-    }
+
 
     /** Sets the Stage for the login controller.
      * This method is used to set the stage that will be closed upon successful login.
@@ -114,5 +97,9 @@ public class LoginController {
      */
     public void setStage(Stage loginStage) {
         this.stage = loginStage;
+    }
+
+    public void setLokalitaDao(LokalitaDao lokalitaDao) {
+        this.lokalitaDao = lokalitaDao;
     }
 }
