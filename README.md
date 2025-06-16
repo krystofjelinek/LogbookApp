@@ -36,6 +36,7 @@ The project is built using **Java 21** and **Maven**. Follow these steps to comp
    ```bash
    java -jar target/LogbookApp-1.0.jar
    ```
+   For login use email: john.doe@example.com
 
 ## Deviations from specifications
 **User Interface**:
