@@ -5,6 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * Controller for displaying details of a Ponor (Dive).
+ * This controller is responsible for showing the details of a selected Ponor
+ * in a separate window.
+ */
 public class PonorDetailController {
 
     @FXML
@@ -19,12 +24,23 @@ public class PonorDetailController {
     @FXML
     private Label dobaLabel;
 
+    @FXML
     private Stage stage;
 
+    /**
+     * Sets the stage for this controller.
+     *
+     * @param stage The Stage object to set.
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Sets the Ponor details in the UI.
+     *
+     * @param ponor The Ponor object containing the details to display.
+     */
     public void setPonor(Ponor ponor) {
         datumLabel.setText("Date: " + ponor.getDatum());
         lokalitaLabel.setText("Dive site: " + ponor.getLokalita().getNazev());
@@ -32,6 +48,10 @@ public class PonorDetailController {
         dobaLabel.setText("Duration: " + ponor.getDoba() + " min");
     }
 
+    /**
+     * Handles the close button click event.
+     * Closes the stage if it is not null.
+     */
     @FXML
     private void onCloseButtonClick() {
         if (stage != null) {

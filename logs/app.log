@@ -1760,3 +1760,230 @@ CREATE TABLE Lokalita (
 2025-06-15 19:34:42 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 20 (min=1)
 2025-06-15 19:34:42 [JavaFX Application Thread] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 2025-06-15 19:34:42 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4fd54b38] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-06-15 19:38:08 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - Attempting to log in user: john.doe@example.com
+2025-06-15 19:38:09 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - User john.doe@example.com found in the database.
+2025-06-15 19:38:09 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - User john.doe@example.com logged in successfully.
+2025-06-15 19:38:09 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Setting user for the session: john.doe@example.com
+2025-06-15 19:38:09 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 19:38:09 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 19:38:09 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 19:38:09 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 2 Ponors
+2025-06-15 19:38:09 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-15 19:38:09 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Ponor: cz.vse.logbookapp.model.Ponor@37d5cde1
+2025-06-15 19:38:09 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-15 19:38:09 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Ponor: cz.vse.logbookapp.model.Ponor@16fed0b
+2025-06-15 19:43:33 [JavaFX Application Thread] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: logbookPU]
+2025-06-15 19:43:33 [JavaFX Application Thread] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-06-15 19:43:33 [JavaFX Application Thread] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-06-15 19:43:33 [JavaFX Application Thread] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-06-15 19:43:33 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: org.h2.Driver
+2025-06-15 19:43:33 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:h2:mem:mydb;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'classpath:database.sql']
+2025-06-15 19:43:33 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {}
+2025-06-15 19:43:33 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-06-15 19:43:33 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 20 (min=1)
+2025-06-15 19:43:33 [JavaFX Application Thread] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-15 19:43:33 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@ba32984] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-06-15 19:43:43 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - Attempting to log in user: john.doe@example.com
+2025-06-15 19:43:43 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - User john.doe@example.com found in the database.
+2025-06-15 19:43:43 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - User john.doe@example.com logged in successfully.
+2025-06-15 19:43:43 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Setting user for the session: john.doe@example.com
+2025-06-15 19:43:43 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 19:43:43 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 19:43:43 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 19:43:43 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 2 Ponors
+2025-06-15 19:43:43 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-15 19:43:43 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Ponor: cz.vse.logbookapp.model.Ponor@ffd46b1
+2025-06-15 19:43:43 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-15 19:43:43 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Ponor: cz.vse.logbookapp.model.Ponor@4eb4c39c
+2025-06-15 19:44:13 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 19:44:13 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 19:44:13 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 19:44:13 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 2 Ponors
+2025-06-15 19:44:13 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-15 19:44:13 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Ponor: cz.vse.logbookapp.model.Ponor@5227b18d
+2025-06-15 19:44:13 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-15 19:44:13 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Ponor: cz.vse.logbookapp.model.Ponor@303c2983
+2025-06-15 19:44:18 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Deleting Ponor with ID: 2
+2025-06-15 19:44:18 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Ponor with ID: 2 deleted successfully
+2025-06-15 19:44:18 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 19:44:18 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 19:44:18 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 19:44:18 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 1 Ponors
+2025-06-15 19:44:18 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-15 19:44:18 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Ponor: cz.vse.logbookapp.model.Ponor@3708d10e
+2025-06-15 19:44:20 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Add button clicked
+2025-06-15 19:44:20 [JavaFX Application Thread] INFO  c.v.l.c.InsertPonorController - Initializing InsertPonorController
+2025-06-15 19:44:24 [JavaFX Application Thread] INFO  c.v.l.c.InsertPonorController - Insert Ponor cancelled
+2025-06-15 19:44:26 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Add Lokalita button clicked
+2025-06-15 19:44:36 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Add Lokalita button clicked
+2025-06-15 19:44:39 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 19:44:39 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 19:44:39 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 19:44:39 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 1 Ponors
+2025-06-15 19:44:39 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-15 19:44:39 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Ponor: cz.vse.logbookapp.model.Ponor@35fb54fc
+2025-06-15 19:44:40 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 19:44:40 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 19:44:40 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 19:44:40 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 2 Ponors
+2025-06-15 19:44:40 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-15 19:44:40 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-15 19:45:11 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 19:45:11 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 19:45:11 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 19:45:11 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 1 Ponors
+2025-06-15 19:45:11 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-15 19:45:11 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Ponor: cz.vse.logbookapp.model.Ponor@3156ef44
+2025-06-15 19:46:54 [JavaFX Application Thread] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: logbookPU]
+2025-06-15 19:46:54 [JavaFX Application Thread] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-06-15 19:46:54 [JavaFX Application Thread] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-06-15 19:46:54 [JavaFX Application Thread] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-06-15 19:46:54 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: org.h2.Driver
+2025-06-15 19:46:54 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:h2:mem:mydb;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'classpath:database.sql']
+2025-06-15 19:46:54 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {}
+2025-06-15 19:46:54 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-06-15 19:46:54 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 20 (min=1)
+2025-06-15 19:46:55 [JavaFX Application Thread] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-15 19:46:55 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3befff99] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-06-15 19:47:06 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - Attempting to log in user: john.doe@example.com
+2025-06-15 19:47:06 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - User john.doe@example.com found in the database.
+2025-06-15 19:47:06 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - User john.doe@example.com logged in successfully.
+2025-06-15 19:47:06 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Setting user for the session: john.doe@example.com
+2025-06-15 19:47:06 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 19:47:06 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 19:47:06 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 19:47:06 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 2 Ponors
+2025-06-15 19:47:06 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-15 19:47:06 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-15 19:47:51 [JavaFX Application Thread] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: logbookPU]
+2025-06-15 19:47:51 [JavaFX Application Thread] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-06-15 19:47:51 [JavaFX Application Thread] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-06-15 19:47:52 [JavaFX Application Thread] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-06-15 19:47:52 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: org.h2.Driver
+2025-06-15 19:47:52 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:h2:mem:mydb;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'classpath:database.sql']
+2025-06-15 19:47:52 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {}
+2025-06-15 19:47:52 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-06-15 19:47:52 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 20 (min=1)
+2025-06-15 19:47:52 [JavaFX Application Thread] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-15 19:47:52 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@464675a5] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-06-15 19:48:04 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - Attempting to log in user: john.doe@example.com
+2025-06-15 19:48:05 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - User john.doe@example.com found in the database.
+2025-06-15 19:48:05 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - User john.doe@example.com logged in successfully.
+2025-06-15 19:48:05 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Setting user for the session: john.doe@example.com
+2025-06-15 19:48:05 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 19:48:05 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 19:48:05 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 19:48:05 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 2 Ponors
+2025-06-15 19:48:05 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-15 19:48:05 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-15 19:48:29 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 19:48:29 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 19:48:29 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 19:48:29 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 2 Ponors
+2025-06-15 19:48:29 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-15 19:48:29 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-15 19:48:30 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Deleting Ponor with ID: 1
+2025-06-15 19:48:30 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Ponor with ID: 1 deleted successfully
+2025-06-15 19:48:30 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 19:48:30 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 19:48:30 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 19:48:30 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 1 Ponors
+2025-06-15 19:48:30 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-15 19:48:46 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Add Lokalita button clicked
+2025-06-15 19:48:52 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 19:48:52 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 19:48:52 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 19:48:52 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 2 Ponors
+2025-06-15 19:48:52 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-15 19:48:52 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-15 19:48:53 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 19:48:53 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 19:48:53 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 19:48:53 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 1 Ponors
+2025-06-15 19:48:53 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-15 19:48:55 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 19:48:55 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 19:48:55 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 19:48:55 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 2 Ponors
+2025-06-15 19:48:55 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-15 19:48:55 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-15 19:48:56 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 19:48:56 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 19:48:56 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 19:48:56 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 1 Ponors
+2025-06-15 19:48:56 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-15 19:48:58 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Add button clicked
+2025-06-15 19:48:58 [JavaFX Application Thread] INFO  c.v.l.c.InsertPonorController - Initializing InsertPonorController
+2025-06-15 20:11:42 [JavaFX Application Thread] INFO  c.v.l.c.InsertPonorController - Insert Ponor cancelled
+2025-06-15 20:12:09 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 20:12:09 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 20:12:09 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 20:12:09 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 2 Ponors
+2025-06-15 20:12:09 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-15 20:12:09 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-15 20:16:03 [JavaFX Application Thread] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: logbookPU]
+2025-06-15 20:16:03 [JavaFX Application Thread] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-06-15 20:16:03 [JavaFX Application Thread] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-06-15 20:16:04 [JavaFX Application Thread] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-06-15 20:16:04 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: org.h2.Driver
+2025-06-15 20:16:04 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:h2:mem:mydb;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'classpath:database.sql']
+2025-06-15 20:16:04 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {}
+2025-06-15 20:16:04 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-06-15 20:16:04 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 20 (min=1)
+2025-06-15 20:16:04 [JavaFX Application Thread] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-15 20:16:04 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@765dec7f] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-06-15 20:16:15 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - Attempting to log in user: john.doe@example.com
+2025-06-15 20:16:16 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - User john.doe@example.com found in the database.
+2025-06-15 20:16:16 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - User john.doe@example.com logged in successfully.
+2025-06-15 20:16:16 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Setting user for the session: john.doe@example.com
+2025-06-15 20:16:16 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 20:16:16 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 20:16:16 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 20:16:16 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 2 Ponors
+2025-06-15 20:16:16 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-15 20:16:16 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-15 20:16:20 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID 1
+2025-06-15 20:16:20 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Starting transaction
+2025-06-15 20:16:20 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetching Ponors for user with ID 1
+2025-06-15 20:16:20 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 2 Ponors
+2025-06-15 20:16:20 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-15 20:16:20 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-15 20:17:01 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Add Lokalita button clicked
+2025-06-16 06:47:31 [JavaFX Application Thread] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: logbookPU]
+2025-06-16 06:47:31 [JavaFX Application Thread] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2025-06-16 06:47:31 [JavaFX Application Thread] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-06-16 06:47:31 [JavaFX Application Thread] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+2025-06-16 06:47:31 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Loaded JDBC driver class: org.h2.Driver
+2025-06-16 06:47:31 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001012: Connecting with JDBC URL [jdbc:h2:mem:mydb;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'classpath:database.sql']
+2025-06-16 06:47:31 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {}
+2025-06-16 06:47:31 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2025-06-16 06:47:31 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.pooling - HHH10001115: Connection pool size: 20 (min=1)
+2025-06-16 06:47:31 [JavaFX Application Thread] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-16 06:47:31 [JavaFX Application Thread] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@cbdf73b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-06-16 06:47:42 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - Attempting to log in user: john.doe@example.com
+2025-06-16 06:47:42 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - User john.doe@example.com found in the database.
+2025-06-16 06:47:42 [JavaFX Application Thread] INFO  c.v.l.controller.LoginController - User john.doe@example.com logged in successfully.
+2025-06-16 06:47:42 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Setting user for the session: john.doe@example.com
+2025-06-16 06:47:42 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID: 1
+2025-06-16 06:47:42 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 2 Ponors
+2025-06-16 06:47:42 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-16 06:47:42 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-16 06:48:08 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID: 1
+2025-06-16 06:48:08 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 2 Ponors
+2025-06-16 06:48:08 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 1
+2025-06-16 06:48:08 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-16 06:48:10 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Deleting Ponor with ID: 1
+2025-06-16 06:48:10 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Ponor with ID: 1 deleted successfully
+2025-06-16 06:48:10 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID: 1
+2025-06-16 06:48:10 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 1 Ponors
+2025-06-16 06:48:10 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-16 06:48:12 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Add Lokalita button clicked
+2025-06-16 06:48:14 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Add button clicked
+2025-06-16 06:48:16 [JavaFX Application Thread] INFO  c.v.l.c.InsertPonorController - Insert Ponor cancelled
+2025-06-16 06:48:17 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Ponory for user with ID: 1
+2025-06-16 06:48:17 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 1 Ponors
+2025-06-16 06:48:17 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Ponor with ID: 2
+2025-06-16 06:48:18 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Loading Lokality for user with ID: 1
+2025-06-16 06:48:18 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Fetched 2 Lokality
+2025-06-16 06:48:18 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Lokalita with ID: 1
+2025-06-16 06:48:18 [JavaFX Application Thread] INFO  c.v.l.controller.PonorController - Processing Lokalita with ID: 2

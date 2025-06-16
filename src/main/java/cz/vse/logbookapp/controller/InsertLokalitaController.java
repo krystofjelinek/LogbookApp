@@ -14,6 +14,11 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Controller for inserting a new Lokalita (Location) entry in the application.
+ * This controller handles the UI interactions for inserting a new Lokalita entry,
+ * including validation and saving the entry to the database.
+ */
 public class InsertLokalitaController {
 
     @FXML
@@ -53,12 +58,14 @@ public class InsertLokalitaController {
         this.controller = ponorController;
     }
 
+    /**
+     * Initializes the controller after the FXML file has been loaded.
+     * This method is called automatically by the JavaFX framework.
+     */
     public void initialize() {
-        // Initialize the ComboBoxes with values
         zemeField.getItems().addAll("Czechia", "Slovakia", "Poland", "Germany", "Austria", "Hungary", "Italy", "France", "Spain", "Other");
         typField.getItems().addAll("Sea", "Lake", "River", "Cave", "Other");
 
-        // Set default values if needed
         zemeField.setValue("Czechia");
         typField.setValue("Lake");
     }
@@ -67,8 +74,13 @@ public class InsertLokalitaController {
         this.stage = stage;
     }
 
+    /**
+     * Handles the save action when the user clicks the save button.
+     * Validates the input fields and saves the new Lokalita entry to the database.
+     * If any validation fails, it logs an error and highlights the invalid fields.
+     * @param actionEvent
+     */
     public void onSave(ActionEvent actionEvent) {
-
         String nazev;
         if (nazevField.getText().isEmpty()) {
             nazevField.setStyle("-fx-border-color: red;");
@@ -120,8 +132,6 @@ public class InsertLokalitaController {
         }
 
         log.info("Saving new Lokalita: {}, {}, {}, {}, {}", nazev, zeme, hloubka, typ, popis);
-        // Here you would typically save the new location to the database
-        // For example:
         Lokalita lokalita = new Lokalita(nazev, zeme, Double.parseDouble(hloubka), typ, popis);
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
@@ -130,21 +140,24 @@ public class InsertLokalitaController {
         transaction.commit();
         log.info("Lokalita saved successfully: {}", lokalita);
         em.close();
-        // After saving, you might want to update the controller or close the stage
         if (stage != null) {
             stage.close();
             log.debug("InsertLokalita popup closed after saving");
         }
         if (controller != null) {
             controller.onLokalityButtonClick(new ActionEvent());
-            // Assuming this method refreshes the list of locations
             log.debug("Lokalita list refreshed in PonorController after saving new Lokalita");
         }
     }
 
+    /**
+     * Handles the cancel action when the user clicks the cancel button.
+     * Closes the popup without saving any changes.
+     * @param actionEvent
+     */
     public void onCancel(ActionEvent actionEvent) {
         if (stage != null) {
-            stage.close(); // Close the popup without saving
+            stage.close();
             log.debug("Cancel button clicked, closing InsertLokalita popup");
         }
     }

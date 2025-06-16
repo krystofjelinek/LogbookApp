@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -9,38 +7,54 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 <?import javafx.scene.control.ComboBox?>
-<VBox spacing="20.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.logbookapp.controller.InsertPonorController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-    <Label text="Add New Dive Log" style="-fx-font-size: 18; -fx-font-weight: bold;">
+
+<VBox spacing="24"
+      xmlns="http://javafx.com/javafx/21.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="cz.vse.logbookapp.controller.InsertPonorController"
+      style="-fx-padding: 32; -fx-background-color: #f4f8fb; -fx-border-radius: 14; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, #b0b8c1, 10, 0.15, 0, 2);">
+    <Label text="Add New Dive Log"
+           style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2a3a4d;">
         <font>
-            <Font name="Arial Bold" size="18.0" />
+            <Font name="Arial Bold" size="22.0" />
         </font>
     </Label>
-    <GridPane hgap="10.0" vgap="10.0">
-        <Label text="Location:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <ComboBox fx:id="lokalitaComboBox" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <GridPane hgap="14" vgap="14">
+        <Label text="Location:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+               style="-fx-font-size: 15px; -fx-text-fill: #4a5a6a;"/>
+        <ComboBox fx:id="lokalitaComboBox" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                  style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 6;"/>
 
-        <Label text="Date:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <DatePicker fx:id="dateField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label text="Date:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+               style="-fx-font-size: 15px; -fx-text-fill: #4a5a6a;"/>
+        <DatePicker fx:id="dateField" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                    style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 6;"/>
 
-        <Label text="Depth (m):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <TextField fx:id="depthTextField" promptText="Enter depth in meters" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label text="Depth (m):" GridPane.columnIndex="0" GridPane.rowIndex="2"
+               style="-fx-font-size: 15px; -fx-text-fill: #4a5a6a;"/>
+        <TextField fx:id="depthTextField" promptText="Enter depth in meters" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                   style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 6;"/>
 
-        <Label text="Duration (min):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <TextField fx:id="durationTextField" promptText="Enter duration in minutes" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label text="Duration (min):" GridPane.columnIndex="0" GridPane.rowIndex="3"
+               style="-fx-font-size: 15px; -fx-text-fill: #4a5a6a;"/>
+        <TextField fx:id="durationTextField" promptText="Enter duration in minutes" GridPane.columnIndex="1" GridPane.rowIndex="3"
+                   style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 6;"/>
 
-        <Label text="Water Temperature (°C):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <TextField fx:id="waterTempTextField" promptText="Enter water temperature" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Label text="Water Temperature (°C):" GridPane.columnIndex="0" GridPane.rowIndex="4"
+               style="-fx-font-size: 15px; -fx-text-fill: #4a5a6a;"/>
+        <TextField fx:id="waterTempTextField" promptText="Enter water temperature" GridPane.columnIndex="1" GridPane.rowIndex="4"
+                   style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 6;"/>
 
-        <Label text="Notes:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <TextField fx:id="notesTextField" promptText="Enter any notes" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <Label text="Notes:" GridPane.columnIndex="0" GridPane.rowIndex="5"
+               style="-fx-font-size: 15px; -fx-text-fill: #4a5a6a;"/>
+        <TextField fx:id="notesTextField" promptText="Enter any notes" GridPane.columnIndex="1" GridPane.rowIndex="5"
+                   style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 6;"/>
     </GridPane>
-    <HBox alignment="CENTER_RIGHT" spacing="10.0">
-        <Button mnemonicParsing="false" text="Cancel" fx:id="cancelButton" onAction="#onCancel" />
-        <Button mnemonicParsing="false" text="Save" fx:id="saveButton" onAction="#onSubmit" />
+    <HBox alignment="CENTER_RIGHT" spacing="16">
+        <Button mnemonicParsing="false" text="Cancel" fx:id="cancelButton" onAction="#onCancel"
+                style="-fx-background-color: #e0e6ed; -fx-text-fill: #2a3a4d; -fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 8 24;"/>
+        <Button mnemonicParsing="false" text="Save" fx:id="saveButton" onAction="#onSubmit"
+                style="-fx-background-color: #3b7ddd; -fx-text-fill: white; -fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 8 24;"/>
     </HBox>
 </VBox>

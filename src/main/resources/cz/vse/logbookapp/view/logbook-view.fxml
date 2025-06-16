@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:controller="cz.vse.logbookapp.controller.PonorController"
-            prefHeight="600.0" prefWidth="800.0"
+            prefHeight="600.0" prefWidth="900.0"
             style="-fx-background-color: #e9eef3;"
             xmlns="http://javafx.com/javafx/21.0.1"
             xmlns:fx="http://javafx.com/fxml/1">
@@ -42,7 +42,7 @@
                     onAction="#onAddButtonClick"
                     mnemonicParsing="false"
                     prefWidth="140.0"
-                    style="-fx-background-color: #3b7ddd; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 8; -fx-padding: 10 0;">
+                    style="-fx-background-color: #88E788; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 8; -fx-padding: 10 0;">
                 <graphic>
                     <VBox alignment="CENTER">
                         <Label text="+" style="-fx-font-size: 32px; -fx-font-weight: bold;" />
@@ -54,7 +54,7 @@
                     onAction="#onAddLokalitaButtonClick"
                     mnemonicParsing="false"
                     prefWidth="140.0"
-                    style="-fx-background-color: #4bbf73; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 8; -fx-padding: 10 0;">
+                    style="-fx-background-color: #88E788; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 8; -fx-padding: 10 0;">
                 <graphic>
                     <VBox alignment="CENTER">
                         <Label text="+" style="-fx-font-size: 36px; -fx-font-weight: bold;" />

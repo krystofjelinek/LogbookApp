@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-        <VBox xmlns="http://javafx.com/javafx"
-              xmlns:fx="http://javafx.com/fxml"
-              fx:controller="cz.vse.logbookapp.controller.InsertLokalitaController"
-              prefHeight="250.0" prefWidth="400.0" alignment="CENTER" spacing="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" AnchorPane.bottomAnchor="20.0">
-            <children>
-                <Label text="Add New Location" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
-                <TextField fx:id="nazevField" promptText="Location name" />
-                <ComboBox fx:id="zemeField" promptText="Country" />
-                <TextField fx:id="hloubkaField" promptText="Depth" />
-                <ComboBox fx:id="typField" promptText="Type" />
-                <TextArea fx:id="popisField" promptText="Description" prefRowCount="5" />
-                <HBox alignment="CENTER" spacing="10.0">
-                    <children>
-                        <Button fx:id="saveButton" text="OK" minWidth="80" onAction="#onSave"/>
-                        <Button fx:id="cancelButton" text="Cancel" minWidth="80" onAction="#onCancel"/>
-                    </children>
-                </HBox>
-            </children>
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-        </VBox>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="cz.vse.logbookapp.controller.InsertLokalitaController"
+      prefHeight="340.0" prefWidth="420.0"
+      alignment="CENTER"
+      spacing="18"
+      style="-fx-padding: 32; -fx-background-color: #f4f8fb; -fx-border-radius: 14; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, #b0b8c1, 10, 0.15, 0, 2);">
+    <Label text="Add New Location"
+           style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2a3a4d;"/>
+    <TextField fx:id="nazevField"
+               promptText="Location name"
+               style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 8;"/>
+    <ComboBox fx:id="zemeField"
+              promptText="Country"
+              style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 8;"/>
+    <TextField fx:id="hloubkaField"
+               promptText="Depth"
+               style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 8;"/>
+    <ComboBox fx:id="typField"
+              promptText="Type"
+              style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 8;"/>
+    <TextArea fx:id="popisField"
+              promptText="Description"
+              prefRowCount="4"
+              style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 8;"/>
+    <HBox alignment="CENTER" spacing="16">
+        <Button fx:id="saveButton"
+                text="OK"
+                minWidth="90"
+                onAction="#onSave"
+                style="-fx-background-color: #3b7ddd; -fx-text-fill: white; -fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 8 24;"/>
+        <Button fx:id="cancelButton"
+                text="Cancel"
+                minWidth="90"
+                onAction="#onCancel"
+                style="-fx-background-color: #e0e6ed; -fx-text-fill: #2a3a4d; -fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 8 24;"/>
+    </HBox>
+</VBox>

@@ -16,9 +16,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.time.LocalDate;
 
+/**
+ * Controller for inserting a new Ponor (Dive) entry in the application.
+ * This controller handles the UI interactions for inserting a new Ponor entry,
+ * including validation and saving the entry to the database.
+ */
 public class InsertPonorController {
 
     private static final Logger log = LoggerFactory.getLogger(InsertPonorController.class);
@@ -50,19 +54,34 @@ public class InsertPonorController {
     private EntityManagerFactory emf;
 
     private Stage stage;
+
     private PonorController ponorController;
+
     private Uzivatel uzivatel;
 
+    /**
+     * Sets the stage for this controller.
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Initializes the controller after the FXML has been loaded.
+     */
     public void postInit() {
-        log.info("Initializing InsertPonorController");
+        log.debug("Initializing InsertPonorController");
         lokalitaComboBox.setItems(getLokalitaList());
         dateField.setValue(LocalDate.now());
     }
 
+    /**
+     * Retrieves the list of Lokalita names from the database.
+     * This method queries the database for all Lokalita entries and returns their names as an ObservableList.
+     *
+     * @return ObservableList of Lokalita names
+     */
     public ObservableList<String> getLokalitaList() {
         EntityManager em = emf.createEntityManager();
         ObservableList<String> lokalitaNazvy = FXCollections.observableArrayList(
@@ -72,6 +91,12 @@ public class InsertPonorController {
         return lokalitaNazvy;
     }
 
+    /**
+     * Retrieves the selected Lokalita from the ComboBox.
+     * This method fetches the Lokalita object based on the selected name in the ComboBox.
+     *
+     * @return Lokalita object corresponding to the selected name, or null if no selection is made
+     */
     public Lokalita getLokalita() {
         String selectedLokalita = lokalitaComboBox.getSelectionModel().getSelectedItem();
         if (selectedLokalita != null) {
@@ -85,6 +110,11 @@ public class InsertPonorController {
         return null;
     }
 
+    /**
+     * Handles the submission of the new Ponor entry.
+     * This method validates the input fields, creates a new Ponor object, and saves it to the database.
+     * If validation fails, it highlights the respective fields in red and logs an error message.
+     */
     @FXML
     private void onSubmit() {
 
@@ -179,6 +209,10 @@ public class InsertPonorController {
         }
     }
 
+    /**
+     * Handles the cancellation of the Ponor insertion.
+     * This method closes the popup without saving any changes.
+     */
     @FXML
     private void onCancel() {
         log.info("Insert Ponor cancelled");
@@ -187,14 +221,33 @@ public class InsertPonorController {
         }
     }
 
+    /**
+     * Sets the EntityManagerFactory for this controller.
+     * This method is used to inject the EntityManagerFactory dependency.
+     *
+     * @param emf EntityManagerFactory instance
+     */
     public void setEntityManagerFactory(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
+    /**
+     * Sets the PonorController for this controller.
+     * This allows the InsertPonorController to interact with the PonorController.
+     *
+     * @param ponorController The PonorController to set
+     */
     public void setPonorController(PonorController ponorController) {
         this.ponorController = ponorController;
     }
 
+    /**
+     * Sets the Uzivatel (User) for this controller.
+     * This method is used to inject the current user into the controller,
+     * allowing the Ponor entry to be associated with the user.
+     *
+     * @param uzivatel The Uzivatel instance representing the current user
+     */
     public void setUzivatel(Uzivatel uzivatel) {
         log.debug("Setting Uzivatel in InsertPonorController: {}", uzivatel.getEmail());
         this.uzivatel = uzivatel;

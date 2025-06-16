@@ -8,34 +8,53 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="cz.vse.logbookapp.controller.PonorEditController" spacing="10" alignment="CENTER" style="-fx-padding: 20;">
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="Date:" minWidth="100"/>
-        <DatePicker fx:id="dateField" promptText="Select date"/>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="cz.vse.logbookapp.controller.PonorEditController"
+      spacing="18"
+      alignment="CENTER"
+      style="-fx-padding: 32; -fx-background-color: #f4f8fb; -fx-border-radius: 14; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, #b0b8c1, 10, 0.15, 0, 2);">
+    <Label text="Edit Dive Log"
+           style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2a3a4d;"/>
+    <HBox spacing="14" alignment="CENTER_LEFT">
+        <Label text="Date:" minWidth="110"
+               style="-fx-font-size: 15px; -fx-text-fill: #4a5a6a;"/>
+        <DatePicker fx:id="dateField" promptText="Select date"
+                    style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 6;"/>
     </HBox>
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="Lokalita:" minWidth="100"/>
-        <ComboBox fx:id="lokalitaComboBox" promptText="Select lokalita" minWidth="200"/>
+    <HBox spacing="14" alignment="CENTER_LEFT">
+        <Label text="Lokalita:" minWidth="110"
+               style="-fx-font-size: 15px; -fx-text-fill: #4a5a6a;"/>
+        <ComboBox fx:id="lokalitaComboBox" promptText="Select lokalita" minWidth="200"
+                  style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 6;"/>
     </HBox>
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="Depth:" minWidth="100"/>
-        <TextField fx:id="depthTextField" promptText="Enter depth"/>
+    <HBox spacing="14" alignment="CENTER_LEFT">
+        <Label text="Depth:" minWidth="110"
+               style="-fx-font-size: 15px; -fx-text-fill: #4a5a6a;"/>
+        <TextField fx:id="depthTextField" promptText="Enter depth"
+                   style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 6;"/>
     </HBox>
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="Duration:" minWidth="100"/>
-        <TextField fx:id="durationTextField" promptText="Enter duration"/>
+    <HBox spacing="14" alignment="CENTER_LEFT">
+        <Label text="Duration:" minWidth="110"
+               style="-fx-font-size: 15px; -fx-text-fill: #4a5a6a;"/>
+        <TextField fx:id="durationTextField" promptText="Enter duration"
+                   style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 6;"/>
     </HBox>
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="Water Temp:" minWidth="100"/>
-        <TextField fx:id="waterTempTextField" promptText="Enter water temperature"/>
+    <HBox spacing="14" alignment="CENTER_LEFT">
+        <Label text="Water Temp:" minWidth="110"
+               style="-fx-font-size: 15px; -fx-text-fill: #4a5a6a;"/>
+        <TextField fx:id="waterTempTextField" promptText="Enter water temperature"
+                   style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 6;"/>
     </HBox>
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="Notes:" minWidth="100"/>
-        <TextField fx:id="notesTextField" promptText="Enter notes"/>
+    <HBox spacing="14" alignment="CENTER_LEFT">
+        <Label text="Notes:" minWidth="110"
+               style="-fx-font-size: 15px; -fx-text-fill: #4a5a6a;"/>
+        <TextField fx:id="notesTextField" promptText="Enter notes"
+                   style="-fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 6;"/>
     </HBox>
-
     <HBox spacing="20" alignment="CENTER">
-        <Button text="Save" onAction="#onSave" fx:id="save"/>
-        <Button text="Cancel" onAction="#onCancel" fx:id="cancel"/>
+        <Button text="Save" onAction="#onSave" fx:id="save"
+                style="-fx-background-color: #3b7ddd; -fx-text-fill: white; -fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 8 24;"/>
+        <Button text="Cancel" onAction="#onCancel" fx:id="cancel"
+                style="-fx-background-color: #e0e6ed; -fx-text-fill: #2a3a4d; -fx-font-size: 15px; -fx-background-radius: 8; -fx-padding: 8 24;"/>
     </HBox>
 </VBox>

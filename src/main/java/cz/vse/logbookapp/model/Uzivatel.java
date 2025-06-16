@@ -27,7 +27,6 @@ public class Uzivatel {
     @OneToMany(mappedBy = "uzivatel", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ponor> ponory;
 
-    // Gettery a settery
     public Long getId() {
         return id;
     }

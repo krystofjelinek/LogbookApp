@@ -30,10 +30,8 @@ public class Lokalita {
     private List<Ponor> ponory;
 
 
-    public Lokalita() {
+    public Lokalita() {}
 
-    }
-    // Konstruktor bez parametrů pro JPA
     public Lokalita(String nazev, String zeme, Double maxHloubka, String typLokality, String popis) {
         this.nazev = nazev;
         this.zeme = zeme;
@@ -41,7 +39,7 @@ public class Lokalita {
         this.typLokality = typLokality;
         this.popis = popis;
     }
-    // Gettery a settery
+
     public Long getId() {
         return id;
     }

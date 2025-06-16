@@ -34,7 +34,6 @@ public class Ponor {
     @Column(name = "poznamka")
     private String poznamka;
 
-    // Gettery a settery
     public Long getId() {
         return id;
     }
