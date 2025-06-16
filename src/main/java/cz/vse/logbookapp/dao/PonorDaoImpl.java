@@ -4,6 +4,7 @@ import cz.vse.logbookapp.model.Ponor;
 import cz.vse.logbookapp.model.Uzivatel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,12 +22,14 @@ public class PonorDaoImpl implements PonorDao {
     public void save(Ponor ponor) {
         logger.debug("Attempting to save Ponor entity with id: {}", ponor.getId());
         EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
-            em.getTransaction().begin();
+            tx.begin();
             em.persist(ponor);
-            em.getTransaction().commit();
+            tx.commit();
             logger.info("Saved Ponor entity with id: {}", ponor.getId());
         } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
             logger.error("Error saving Ponor entity with id: {}", ponor.getId(), e);
             throw e;
         } finally {
@@ -39,12 +42,14 @@ public class PonorDaoImpl implements PonorDao {
     public void update(Ponor ponor) {
         logger.debug("Attempting to update Ponor entity with id: {}", ponor.getId());
         EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
-            em.getTransaction().begin();
+            tx.begin();
             em.merge(ponor);
-            em.getTransaction().commit();
+            tx.commit();
             logger.info("Updated Ponor entity with id: {}", ponor.getId());
         } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
             logger.error("Error updating Ponor entity with id: {}", ponor.getId(), e);
             throw e;
         } finally {
@@ -57,8 +62,9 @@ public class PonorDaoImpl implements PonorDao {
     public void delete(Long id) {
         logger.debug("Attempting to delete Ponor entity with id: {}", id);
         EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
-            em.getTransaction().begin();
+            tx.begin();
             Ponor ponor = em.find(Ponor.class, id);
             if (ponor != null) {
                 em.remove(ponor);
@@ -66,8 +72,9 @@ public class PonorDaoImpl implements PonorDao {
             } else {
                 logger.info("No Ponor entity found with id: {} to delete.", id);
             }
-            em.getTransaction().commit();
+            tx.commit();
         } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
             logger.error("Error deleting Ponor entity with id: {}", id, e);
             throw e;
         } finally {
@@ -79,14 +86,18 @@ public class PonorDaoImpl implements PonorDao {
     @Override
     public List<Ponor> findAllByUser(Uzivatel uzivatel) {
         EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
             logger.debug("Fetching all Ponor entities for Uzivatel with id: {}", uzivatel.getId());
+            tx.begin();
             List<Ponor> ponorList = em.createQuery("SELECT p FROM Ponor p WHERE p.uzivatel.id = :uzivatelId", Ponor.class)
                     .setParameter("uzivatelId", uzivatel.getId())
                     .getResultList();
+            tx.commit();
             logger.info("Fetched {} Ponor entities for Uzivatel id: {}", ponorList.size(), uzivatel.getId());
             return ponorList;
         } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
             logger.error("Error fetching Ponor entities for Uzivatel id: {}", uzivatel.getId(), e);
             throw e;
         } finally {

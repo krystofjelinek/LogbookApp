@@ -3,6 +3,7 @@ package cz.vse.logbookapp.dao;
 import cz.vse.logbookapp.model.Uzivatel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,11 +20,15 @@ public class UzivatelDaoImpl implements UzivatelDao {
     @Override
     public Uzivatel findByEmail(String email) {
         EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
             logger.debug("Fetching Uzivatel by email: {}", email);
+            tx.begin();
             List<Uzivatel> result = em.createQuery("SELECT u FROM Uzivatel u WHERE u.email = :email", Uzivatel.class)
                     .setParameter("email", email)
                     .getResultList();
+            tx.commit();
+            logger.info("Fetched {} Uzivatel(s) with email: {}", result.size(), email);
             if (result.isEmpty()) {
                 logger.info("No Uzivatel found with email: {}", email);
                 return null;
@@ -33,6 +38,9 @@ public class UzivatelDaoImpl implements UzivatelDao {
             }
         } catch (Exception e) {
             logger.error("Error fetching Uzivatel by email: {}", email, e);
+            if (tx.isActive()){
+                tx.rollback();
+            }
             throw e;
         } finally {
             em.close();

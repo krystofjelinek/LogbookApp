@@ -23,12 +23,16 @@ public class LokalitaDaoImpl implements LokalitaDao {
     @Override
     public List<Lokalita> findAll() {
         EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
         try {
             logger.debug("Fetching all Lokalita entities.");
+            transaction.begin();
             List<Lokalita> lokalitaList = em.createQuery("SELECT l FROM Lokalita l", Lokalita.class).getResultList();
+            transaction.commit();
             logger.info("Fetched {} Lokalita entities.", lokalitaList.size());
             return lokalitaList;
         } catch (Exception e) {
+            if (transaction.isActive()) transaction.rollback();
             logger.error("Error fetching all Lokalita entities.", e);
             throw e;
         } finally {
@@ -40,17 +44,22 @@ public class LokalitaDaoImpl implements LokalitaDao {
     @Override
     public Lokalita findByNazev(String nazev) {
         EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
         try {
             logger.debug("Fetching Lokalita by nazev: {}", nazev);
+            transaction.begin();
             Lokalita lokalita = em.createQuery("SELECT l FROM Lokalita l WHERE l.nazev = :nazev", Lokalita.class)
                     .setParameter("nazev", nazev)
                     .getSingleResult();
+            transaction.commit();
             logger.info("Found Lokalita: {}", lokalita.getNazev());
             return lokalita;
         } catch (NoResultException e) {
+            if (transaction.isActive()) transaction.rollback();
             logger.warn("No Lokalita found with nazev: {}", nazev);
             return null;
         } catch (Exception e) {
+            if (transaction.isActive()) transaction.rollback();
             logger.error("Error fetching Lokalita by nazev: {}", nazev, e);
             throw e;
         } finally {
@@ -62,17 +71,21 @@ public class LokalitaDaoImpl implements LokalitaDao {
     @Override
     public ObservableMap<String, Lokalita> findAllMap() {
         EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
         try {
             logger.debug("Fetching all Lokalita entities for map.");
+            transaction.begin();
             List<Lokalita> lokalitaList = em.createQuery("SELECT l FROM Lokalita l", Lokalita.class)
                     .getResultList();
             ObservableMap<String, Lokalita> lokalitaMap = FXCollections.observableHashMap();
             for (Lokalita lokalita : lokalitaList) {
                 lokalitaMap.put(lokalita.getNazev(), lokalita);
             }
+            transaction.commit();
             logger.info("Fetched {} Lokalita entities for map.", lokalitaMap.size());
             return lokalitaMap;
         } catch (Exception e) {
+            if (transaction.isActive()) transaction.rollback();
             logger.error("Error fetching Lokalita map.", e);
             throw e;
         } finally {
