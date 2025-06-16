@@ -96,13 +96,15 @@ public class InsertLokalitaController {
         }
 
         String hloubka;
-        if (hloubkaField.getText().isEmpty() || Double.parseDouble(hloubkaField.getText()) <= 0) {
-            hloubkaField.setStyle("-fx-border-color: red;");
-            log.error("Hloubka lokality musí být větší než 0");
-            return;
-        } else {
+        try {
+            double parsedHloubka = Double.parseDouble(hloubkaField.getText());
+            if (parsedHloubka <= 0) throw new NumberFormatException();
             hloubkaField.setStyle("-fx-border-color: none;");
             hloubka = hloubkaField.getText();
+        } catch (NumberFormatException e) {
+            hloubkaField.setStyle("-fx-border-color: red;");
+            log.error("Hloubka lokality musí být větší než 0 a platné číslo");
+            return;
         }
 
         String typ;

@@ -102,26 +102,32 @@ public class PonorEditController {
         } else {
             lokalitaComboBox.setStyle("-fx-border-color: none;");
         }
-        if (depthTextField.getText().isEmpty() || Double.parseDouble(depthTextField.getText()) <= 0) {
-            depthTextField.setStyle("-fx-border-color: red;");
-            log.warn("Depth field is empty or invalid");
-            return;
-        } else {
+        try {
+            double depth = Double.parseDouble(depthTextField.getText());
+            if (depth <= 0) throw new NumberFormatException();
             depthTextField.setStyle("-fx-border-color: none;");
-        }
-        if (durationTextField.getText().isEmpty() || Integer.parseInt(durationTextField.getText()) <= 0) {
-            durationTextField.setStyle("-fx-border-color: red;");
-            log.warn("Duration field is empty or invalid");
+        } catch (NumberFormatException e) {
+            depthTextField.setStyle("-fx-border-color: red;");
+            log.warn("Depth field is empty or not a valid number");
             return;
-        } else {
+        }
+        try {
+            int duration = Integer.parseInt(durationTextField.getText());
+            if (duration <= 0) throw new NumberFormatException();
             durationTextField.setStyle("-fx-border-color: none;");
-        }
-        if (waterTempTextField.getText().isEmpty() || Double.parseDouble(waterTempTextField.getText()) < 0) {
-            waterTempTextField.setStyle("-fx-border-color: red;");
-            log.warn("Water temperature field is empty or invalid");
+        } catch (NumberFormatException e) {
+            durationTextField.setStyle("-fx-border-color: red;");
+            log.warn("Duration field is empty or not a valid number");
             return;
-        } else {
+        }
+        try {
+            double waterTemp = Double.parseDouble(waterTempTextField.getText());
+            if (waterTemp < 0) throw new NumberFormatException();
             waterTempTextField.setStyle("-fx-border-color: none;");
+        } catch (NumberFormatException e) {
+            waterTempTextField.setStyle("-fx-border-color: red;");
+            log.warn("Water temperature field is empty or not a valid number");
+            return;
         }
         if (notesTextField.getText().isEmpty()) {
             notesTextField.setStyle("-fx-border-color: red;");

@@ -105,13 +105,14 @@ public class InsertPonorController {
         }
 
         double hloubka;
-        if (depthTextField.getText().isEmpty() || Double.parseDouble(depthTextField.getText()) <= 0) {
-            depthTextField.setStyle("-fx-border-color: red;");
-            log.error("Hloubka must not be empty");
-            return;
-        } else {
-            depthTextField.setStyle("-fx-border-color: none;");
+        try {
             hloubka = Double.parseDouble(depthTextField.getText());
+            if (hloubka <= 0) throw new NumberFormatException();
+            depthTextField.setStyle("-fx-border-color: none;");
+        } catch (NumberFormatException e) {
+            depthTextField.setStyle("-fx-border-color: red;");
+            log.error("Hloubka must not be empty and must be a positive number");
+            return;
         }
 
         LocalDate datum;
@@ -121,27 +122,29 @@ public class InsertPonorController {
             return;
         } else {
             dateField.setStyle("-fx-border-color: none;");
-            datum = LocalDate.parse(dateField.getValue().toString());
+            datum = dateField.getValue();
         }
 
         int doba;
-        if (durationTextField.getText().isEmpty() || Integer.parseInt(durationTextField.getText()) <= 0) {
-            durationTextField.setStyle("-fx-border-color: red;");
-            log.error("Doba must not be empty and must be greater than 0");
-            return;
-        } else {
-            durationTextField.setStyle("-fx-border-color: none;");
+        try {
             doba = Integer.parseInt(durationTextField.getText());
+            if (doba <= 0) throw new NumberFormatException();
+            durationTextField.setStyle("-fx-border-color: none;");
+        } catch (NumberFormatException e) {
+            durationTextField.setStyle("-fx-border-color: red;");
+            log.error("Doba must not be empty and must be a positive integer");
+            return;
         }
 
         double teplotaVody;
-        if (waterTempTextField.getText().isEmpty()) {
-            waterTempTextField.setStyle("-fx-border-color: red;");
-            log.error("Teplota vody must not be empty");
-            return;
-        } else {
-            waterTempTextField.setStyle("-fx-border-color: none;");
+        try {
             teplotaVody = Double.parseDouble(waterTempTextField.getText());
+            if (teplotaVody < 0) throw new NumberFormatException();
+            waterTempTextField.setStyle("-fx-border-color: none;");
+        } catch (NumberFormatException e) {
+            waterTempTextField.setStyle("-fx-border-color: red;");
+            log.error("Teplota vody must not be empty and must be a non-negative number");
+            return;
         }
 
         String poznamka;
